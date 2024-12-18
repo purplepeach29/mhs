@@ -38,11 +38,13 @@ const SignIn = () => {
     <SafeAreaView className="bg-primary h-full">
       <ScrollView>
         <View className="w-full justify-center min-h-[85vh] px-4 my-6">
-          <Image
+          <View className="flex-row items-center"><Image 
             source={images.logo}
-            className="w-[115px] h-[35px]"
+            className="w-[80px] h-[50px]"
             resizeMode='contain'
           />
+          <Text className="text-white text-xl font-bold">PHYSIOCARE</Text>
+          </View>
           <Text className="text-2xl text-white font-psemibold mt-10 
           text-semibold">Login in to MHS</Text>
           <FormField

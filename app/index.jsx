@@ -15,11 +15,13 @@ export default function App() {
     <SafeAreaView className="bg-primary h-full">
       <ScrollView contentContainerStyle={{ height:'100%'}}>
         <View className="w-full flex flex-col items-center justify-center min-h-[85vh] px-4">
-          <Image 
+          <View className="flex-row items-center"><Image 
             source={images.logo}
-            className="w-[130px] h-[80px]"
+            className="w-[90px] h-[60px] zIndex-3"
             resizeMode='contain'
           />
+          <Text className="text-white text-2xl font-bold bg-red-700 rounded-md px-2">PHYSIOCARE</Text>
+          </View>
           <Image 
             source={images.cards}
             className="max-w-[380px] w-full h-[300px]"
