@@ -40,19 +40,33 @@ const VideoCard = ({ video:{title, thumbnail, video, creator:{ username, avatar}
         </View>
       </View>
 
-      {play ? (<Text>playing</Text>
-        // <Video
-        //   source={{ uri: video }}
-        //   className="w-full h-60 rounded-xl mt-3"
-        //   resizeMode={ResizeMode.CONTAIN}
-        //   useNativeControls
-        //   shouldPlay
-        //   onPlaybackStatusUpdate={(status) => {
-        //     if (status.didJustFinish) {
-        //       setPlay(false);
-        //     }
-        //   }}
-        // />
+      {play ? (
+        <Video
+        source={{
+          uri: video,
+          headers: {
+            "User-Agent":
+              "Mozilla/5.0 (Linux; Android 13; Pixel 6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36",
+            Accept: "*/*",
+            "Accept-Language": "en-US,en;q=0.9",
+            "Accept-Encoding": "gzip, deflate",
+            Connection: "keep-alive",
+          },
+        }}
+        style={{
+          width: '100%',
+          height: 288,
+          borderRadius: 35,
+          marginTop: 12,
+          backgroundColor: "#000",
+        }}
+        resizeMode={ResizeMode.CONTAIN}
+        useNativeControls
+        shouldPlay
+        onPlaybackStatusUpdate={(status) => {
+          if (status.didJustFinish) setPlay(false);
+        }}
+       />
       ) : (
         <TouchableOpacity
           activeOpacity={0.7}

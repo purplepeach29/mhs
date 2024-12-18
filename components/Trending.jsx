@@ -38,17 +38,31 @@ const TrendingItem = ({activeItem, item}) => {
             //<Text className="text-white">Playing</Text>
 
             <Video
-          source={{ uri: "https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4" }}
-          className="w-full h-60 rounded-xl mt-3"
-          resizeMode='contain'
-          useNativeControls
-          shouldPlay
-          onPlaybackStatusUpdate={(status) => {
-            if (status.didJustFinish) {
-              setPlay(false);
-            }
-          }}
-        />
+            source={{
+              uri: item.video ,
+              headers: {
+                "User-Agent":
+                  "Mozilla/5.0 (Linux; Android 13; Pixel 6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Mobile Safari/537.36",
+                Accept: "*/*",
+                "Accept-Language": "en-US,en;q=0.9",
+                "Accept-Encoding": "gzip, deflate",
+                Connection: "keep-alive",
+              },
+            }}
+            style={{
+              width: 208,
+              height: 250,
+              borderRadius: 35,
+              marginTop: 12,
+              backgroundColor: "#000",
+            }}
+            resizeMode={ResizeMode.CONTAIN}
+            useNativeControls
+            shouldPlay
+            onPlaybackStatusUpdate={(status) => {
+              if (status.didJustFinish) setPlay(false);
+            }}
+           />
         
         ):(
             <TouchableOpacity className="relative justify-center items-center" activeOpacity={0.7}
