@@ -1,11 +1,27 @@
 import { useState } from "react";
 import { ResizeMode, Video } from "expo-av";
 import { View, Text, TouchableOpacity, Image } from "react-native";
-
+import { deleteVideo , getUserPosts} from '../lib/appwrite';
+import useAppwrite from '../lib/useAppwrite';
 import { icons } from "../constants";
+import { useGlobalContext } from '../context/GlobalProvider'; 
 
-const VideoCard = ({ video:{title, thumbnail, video, creator:{ username, avatar}} }) => {
+
+const VideoCard = ({ video:{title, $id, thumbnail, video, creator:{ username, avatar}}, isProfile }) => {
   const [play, setPlay] = useState(false);
+  const {user}= useGlobalContext();
+  const { data: posts, refetch } = useAppwrite(() => getUserPosts(user.$id));
+  
+  // const deleteVid = async ($id) => {
+  //   if (onDelete) {
+  //     await onDelete($id);  // Trigger the delete function passed as prop
+  //   }
+  // };
+  const deleteVid=async($id)=>{
+    // console.log($id);
+    await deleteVideo($id);
+    await refetch();
+  }
 
   return (
     <View className="flex flex-col items-center px-4 mb-14">
@@ -36,7 +52,16 @@ const VideoCard = ({ video:{title, thumbnail, video, creator:{ username, avatar}
         </View>
 
         <View className="pt-2">
+          {isProfile?
+          (
+          <TouchableOpacity onPress={()=>deleteVid($id)}>
+          <Image source={icons.deleteIcon} className="w-5 h-5" resizeMode="contain" />
+          </TouchableOpacity>
+          )
+          :
           <Image source={icons.menu} className="w-5 h-5" resizeMode="contain" />
+
+            }
         </View>
       </View>
 
