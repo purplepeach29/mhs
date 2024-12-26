@@ -1,5 +1,5 @@
-import React, { useEffect} from 'react';
-import {Text, View, FlatList, Image, TouchableOpacity} from 'react-native';
+import React, { useEffect, useState} from 'react';
+import {Text, View, FlatList, Image, TouchableOpacity, RefreshControl} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import InfoBox from '../../components/InfoBox';
 import EmptyState from '../../components/EmptyState';
@@ -15,7 +15,13 @@ const Profile = () => {
 
   const {user, setUser, setIsLogged }= useGlobalContext();
   const { data: posts, refetch } = useAppwrite(() => getUserPosts(user.$id));
-
+  const [refreshing, setRefreshing] = useState(false);
+ 
+  const onRefresh = async () => {
+      setRefreshing(true)
+      await refetch();
+      setRefreshing(false)
+  }
   const logout = async () =>{
     await signOut();
     setUser(null);
@@ -73,7 +79,11 @@ const Profile = () => {
                       subtitle="No video found for this search query"
                   />
                 )}
+                refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+
           />
+          {/* {posts.map((post)=>console.log(post.$id)
+          )} */}
       </SafeAreaView>
     );
 }
