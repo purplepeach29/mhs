@@ -43,7 +43,7 @@ const SignUp = () => {
             className="w-[80px] h-[50px]"
             resizeMode='contain'
           />
-          <Text className="text-white text-xl font-bold">PHYSIOCARE</Text>
+          <Text className="text-white text-xl font-bold bg-red-700 rounded-md px-2">PHYSIOCARE</Text>
           </View>
           <Text className="text-2xl text-white font-psemibold mt-10 
           text-semibold">Sign up to MHS</Text>
