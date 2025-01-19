@@ -10,12 +10,12 @@ import { getAllPosts, getLatestPosts, getCurrentUser } from '../../lib/appwrite'
 import useAppwrite from '../../lib/useAppwrite';
 import { useGlobalContext } from '../../context/GlobalProvider';
 
+
 const Home = () => {
     const {user, setUser, setIsLogged }= useGlobalContext();
     const { data: posts, refetch } = useAppwrite(getAllPosts);
     const { data: latestPosts} = useAppwrite(getLatestPosts);
-    const [refreshing, setRefreshing] = useState(false);
-   
+    const [refreshing, setRefreshing] = useState(false);          
     const onRefresh = async () => {
         setRefreshing(true)
         await refetch();
